@@ -282,7 +282,7 @@ const ServicesPage = () => {
                         onClick={handleClearImage}
                         title="Remove image"
                       >
-                        <Trash2 size={16} />
+                        <X size={16} />
                       </button>
                       <div className="image-controls">
                         <button 
@@ -403,14 +403,14 @@ const ServicesPage = () => {
                               title="View Full Size"
                               onClick={handleToggleFullImage}
                             >
-                              <ZoomIn size={18} />
+                              <Eye size={16} />
                             </button>
                             <button 
                               className="icon-button" 
                               title="Download Image"
                               onClick={handleDownloadImage}
                             >
-                              <Download size={18} />
+                              <FileDown size={16} />
                             </button>
                           </div>
                         </div>
@@ -421,7 +421,7 @@ const ServicesPage = () => {
                             className="annotated-image"
                           />
                           <div className="image-click-hint">
-                            <Maximize size={24} />
+                            <Eye size={20} />
                             <span>Click to enlarge</span>
                           </div>
                         </div>
@@ -434,9 +434,6 @@ const ServicesPage = () => {
                           <div className={`diagnosis-card ${getSeverityClass(result.classification.class)}`}>
                             <div className="diagnosis-header">
                               <h4>{result.classification.class} Diabetic Retinopathy</h4>
-                              <button className="info-button" title="More Information">
-                                <Info size={16} />
-                              </button>
                             </div>
                             <div className="confidence-bar">
                               <div className="confidence-label">Confidence:</div>

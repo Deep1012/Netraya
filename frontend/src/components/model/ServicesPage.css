@@ -308,16 +308,15 @@ body {
 
 .image-preview-wrapper {
   position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto var(--spacing-4);
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--neutral-900);
   box-shadow: var(--shadow-md);
-  aspect-ratio: 16/9;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: var(--transition-transform);
+  border: 1px solid var(--neutral-700);
+  background-color: var(--neutral-900);
+  transition: var(--transition-all);
 }
 
 .image-preview-wrapper:hover {
@@ -326,10 +325,13 @@ body {
 
 .preview-image {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+  max-width: 400px;
+  height: auto;
   border-radius: var(--radius-md);
+  object-fit: cover;
+  transition: var(--transition-transform);
+  margin: 0 auto;
+  display: block;
 }
 
 .remove-image-btn {
@@ -683,10 +685,14 @@ body {
 
 .annotated-image {
   width: 100%;
+  max-width: 600px;
   height: auto;
-  display: block;
   object-fit: contain;
   border-radius: var(--radius-md);
+  border: 1px solid var(--neutral-700);
+  transition: var(--transition-all);
+  margin: 0 auto;
+  display: block;
 }
 
 .image-click-hint {
