@@ -90,48 +90,15 @@ body {
   min-height: 100vh;
   width: 100%;
   background: linear-gradient(to bottom, var(--neutral-950), var(--neutral-900));
-  padding: 2rem 0;
+  padding: var(--spacing-8) 0;
   overflow-x: hidden;
 }
 
-/* Fix for empty containers in the UI */
-.app-container button:empty,
-.app-container div:empty {
-  display: none !important;
-}
-
-/* Remove default styling from buttons and containers without content */
-button:empty, 
-div:empty,
-button:not(:has(*)), 
-div:not(:has(*)) {
-  display: none !important;
-}
-
-/* Text Icons */
-.text-icon {
+.icon {
   display: inline-block;
-  font-size: 1.25rem;
-  margin-right: 0.5rem;
   vertical-align: middle;
-  line-height: 1;
-}
-
-.card-header h2 .text-icon {
-  font-size: 1.25rem;
-}
-
-.dropzone-icon {
-  font-size: 3rem !important;
-  margin-bottom: 1rem;
-}
-
-.large-icon {
-  font-size: 2rem !important;
-  margin: 0;
-}
-
-.feature .text-icon {
+  width: 1.25rem;
+  height: 1.25rem;
   margin-right: 0.5rem;
 }
 
@@ -140,8 +107,12 @@ div:not(:has(*)) {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Container Styles */
@@ -149,15 +120,15 @@ div:not(:has(*)) {
   max-width: 100%;
   width: 94%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--spacing-4);
 }
 
 /* Header Styles */
 .services-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--spacing-10);
   text-align: center;
   position: relative;
-  padding-bottom: 1.5rem;
+  padding-bottom: var(--spacing-6);
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
@@ -172,7 +143,7 @@ div:not(:has(*)) {
   width: 60px;
   height: 4px;
   background: var(--primary-500);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
 }
 
 .badge {
@@ -182,8 +153,8 @@ div:not(:has(*)) {
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0.375rem 0.75rem;
-  border-radius: 9999px;
-  margin-bottom: 1rem;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--spacing-4);
   border: 1px solid rgba(30, 166, 255, 0.2);
   box-shadow: 0 0 15px rgba(30, 166, 255, 0.1);
   text-transform: uppercase;
@@ -193,7 +164,7 @@ div:not(:has(*)) {
 .services-header h1 {
   font-size: 2.75rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4);
   line-height: 1.2;
 }
 
@@ -218,7 +189,7 @@ div:not(:has(*)) {
 .vertical-layout {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--spacing-8);
   width: 100%;
   margin: 0 auto;
   max-width: 1600px;
@@ -231,21 +202,21 @@ div:not(:has(*)) {
 /* Card Styles */
 .card {
   background: rgba(30, 41, 59, 0.5);
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--neutral-800);
   overflow: hidden;
   backdrop-filter: blur(8px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  transition: 0.3s ease all;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-all);
 }
 
 .card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-xl);
   border-color: var(--neutral-700);
 }
 
 .card-header {
-  padding: 1rem 1.5rem;
+  padding: var(--spacing-4) var(--spacing-6);
   border-bottom: 1px solid var(--neutral-800);
   background: rgba(15, 23, 42, 0.5);
   display: flex;
@@ -262,31 +233,31 @@ div:not(:has(*)) {
 }
 
 .card-content {
-  padding: 1.5rem;
+  padding: var(--spacing-6);
 }
 
 .card-footer {
-  padding: 1rem 1.5rem;
+  padding: var(--spacing-4) var(--spacing-6);
   border-top: 1px solid var(--neutral-800);
   background: rgba(15, 23, 42, 0.3);
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--spacing-4);
 }
 
 /* Upload Card Styles */
 .upload-card {
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
 }
 
 /* Dropzone Styles */
 .dropzone {
   border: 2px dashed var(--neutral-700);
-  border-radius: 0.75rem;
-  padding: 2.5rem;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-10);
   text-align: center;
   cursor: pointer;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
   background: rgba(15, 23, 42, 0.3);
   position: relative;
   min-height: 250px;
@@ -304,14 +275,21 @@ div:not(:has(*)) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: var(--spacing-4);
+}
+
+.dropzone-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--primary-500);
+  opacity: 0.7;
 }
 
 .dropzone h3 {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--neutral-100);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-2);
 }
 
 .dropzone p {
@@ -321,82 +299,29 @@ div:not(:has(*)) {
   margin: 0 auto;
 }
 
-.upload-button {
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.5rem;
-  background: rgba(30, 166, 255, 0.1);
-  color: var(--primary-300);
-  font-weight: 600;
-  border: 1px solid rgba(30, 166, 255, 0.2);
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: 0.3s ease all;
-}
-
-.upload-button:hover {
-  background: rgba(30, 166, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.upload-options {
-  text-align: center;
-  margin-top: 1rem;
-  color: var(--neutral-400);
-  font-size: 0.875rem;
-  position: relative;
-}
-
-.upload-options::before,
-.upload-options::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 20%;
-  height: 1px;
-  background: var(--neutral-800);
-}
-
-.upload-options::before {
-  left: 10%;
-}
-
-.upload-options::after {
-  right: 10%;
-}
-
 .preview-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-4);
   width: 100%;
 }
 
 .image-preview-wrapper {
   position: relative;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--neutral-900);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   aspect-ratio: 16/9;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s ease;
+  transition: var(--transition-transform);
 }
 
 .image-preview-wrapper:hover {
   transform: scale(1.01);
-}
-
-.image-preview-wrapper:hover .remove-image-btn,
-.image-preview-wrapper:hover .image-controls {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .preview-image {
@@ -404,7 +329,7 @@ div:not(:has(*)) {
   height: 100%;
   object-fit: contain;
   display: block;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
 }
 
 .remove-image-btn {
@@ -413,19 +338,18 @@ div:not(:has(*)) {
   right: 10px;
   width: 32px;
   height: 32px;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background-color: rgba(15, 23, 42, 0.7);
   border: 1px solid var(--neutral-700);
-  color: white;
+  color: var(--neutral-300);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   opacity: 0;
   transform: translateY(-10px);
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
   backdrop-filter: blur(4px);
-  z-index: 5;
 }
 
 .image-preview-wrapper:hover .remove-image-btn {
@@ -439,51 +363,8 @@ div:not(:has(*)) {
   border-color: rgba(239, 68, 68, 0.4);
 }
 
-.image-controls {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(15, 23, 42, 0.85);
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0.75rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: 0.3s ease all;
-  backdrop-filter: blur(4px);
-  z-index: 4;
-}
-
-.control-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: rgba(15, 23, 42, 0.7);
-  color: white;
-  border: 1px solid var(--neutral-700);
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: 0.3s ease all;
-}
-
-.remove-button:hover {
-  background: rgba(239, 68, 68, 0.2);
-  color: white;
-  border-color: rgba(239, 68, 68, 0.4);
-}
-
-.change-button:hover {
-  background: rgba(30, 166, 255, 0.2);
-  color: var(--primary-300);
-  border-color: rgba(30, 166, 255, 0.4);
-}
-
 .progress-container {
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-2);
   width: 100%;
 }
 
@@ -491,7 +372,7 @@ div:not(:has(*)) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-2);
   font-size: 0.875rem;
   color: var(--neutral-300);
 }
@@ -504,7 +385,7 @@ div:not(:has(*)) {
 .progress {
   height: 6px;
   background-color: var(--neutral-800);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   overflow: hidden;
   position: relative;
 }
@@ -512,7 +393,7 @@ div:not(:has(*)) {
 .progress-bar {
   height: 100%;
   background: linear-gradient(to right, var(--primary-600), var(--primary-400));
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   transition: width 0.3s ease;
   position: absolute;
   top: 0;
@@ -522,13 +403,18 @@ div:not(:has(*)) {
 .error-message {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
   background-color: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.2);
   color: var(--neutral-200);
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   font-size: 0.875rem;
+}
+
+.error-message svg {
+  color: #ef4444;
+  flex-shrink: 0;
 }
 
 .process-button {
@@ -536,16 +422,16 @@ div:not(:has(*)) {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: var(--spacing-3) var(--spacing-4);
   border: none;
   background: linear-gradient(to right, var(--primary-600), var(--primary-500));
   color: white;
   font-weight: 600;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
   font-size: 1rem;
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-2);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -567,14 +453,14 @@ div:not(:has(*)) {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.25rem;
+  padding: var(--spacing-3) var(--spacing-5);
   background: linear-gradient(to right, var(--primary-600), var(--primary-500));
   color: white;
   font-weight: 600;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   min-width: 150px;
 }
@@ -589,14 +475,14 @@ div:not(:has(*)) {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.25rem;
+  padding: var(--spacing-3) var(--spacing-5);
   background: rgba(15, 23, 42, 0.5);
   color: var(--neutral-300);
   font-weight: 600;
   border: 1px solid var(--neutral-700);
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
   backdrop-filter: blur(4px);
   min-width: 150px;
 }
@@ -610,17 +496,16 @@ div:not(:has(*)) {
 .icon-button {
   width: 36px;
   height: 36px;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background-color: rgba(15, 23, 42, 0.5);
   border: 1px solid var(--neutral-700);
-  color: white;
+  color: var(--neutral-300);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
   backdrop-filter: blur(4px);
-  position: relative;
 }
 
 .icon-button:hover {
@@ -638,15 +523,15 @@ div:not(:has(*)) {
 .examples-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
+  gap: var(--spacing-4);
   width: 100%;
 }
 
 .example-image-container {
   position: relative;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   cursor: pointer;
   aspect-ratio: 1/1;
 }
@@ -655,7 +540,7 @@ div:not(:has(*)) {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: var(--transition-transform);
   display: block;
 }
 
@@ -667,16 +552,16 @@ div:not(:has(*)) {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: var(--transition-opacity);
   backdrop-filter: blur(2px);
 }
 
 .example-overlay span {
   color: white;
   font-weight: 600;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-2) var(--spacing-4);
   background: rgba(30, 166, 255, 0.3);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   border: 1px solid rgba(30, 166, 255, 0.4);
 }
 
@@ -702,7 +587,7 @@ div:not(:has(*)) {
   font-size: 0.875rem;
   font-weight: 600;
   padding: 0.375rem 0.75rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: flex;
@@ -729,31 +614,31 @@ div:not(:has(*)) {
 .results-grid {
   display: grid;
   grid-template-columns: 45% 55%;
-  gap: 1.5rem;
+  gap: var(--spacing-6);
   width: 100%;
 }
 
 .result-details {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--spacing-6);
 }
 
 .result-section-item {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--spacing-3);
 }
 
 .result-section-item:last-child {
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-2);
 }
 
 .section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-2);
 }
 
 .result-section-item h3 {
@@ -761,7 +646,7 @@ div:not(:has(*)) {
   font-weight: 600;
   color: var(--neutral-200);
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--spacing-2);
   display: inline-block;
 }
 
@@ -773,27 +658,27 @@ div:not(:has(*)) {
   width: 40px;
   height: 3px;
   background: var(--primary-500);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
 }
 
 .action-buttons {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--spacing-2);
 }
 
 .annotated-image-container {
   position: relative;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-transform);
   cursor: pointer;
   background: var(--neutral-900);
 }
 
 .annotated-image-container:hover {
   transform: scale(1.02);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
 .annotated-image {
@@ -801,7 +686,7 @@ div:not(:has(*)) {
   height: auto;
   display: block;
   object-fit: contain;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
 }
 
 .image-click-hint {
@@ -810,22 +695,20 @@ div:not(:has(*)) {
   right: 10px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(15, 23, 42, 0.85);
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
+  gap: var(--spacing-2);
+  background: rgba(15, 23, 42, 0.7);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius);
   backdrop-filter: blur(4px);
   opacity: 0;
   transform: translateY(10px);
-  transition: 0.3s ease all;
-  color: white;
-  z-index: 3;
+  transition: var(--transition-all);
 }
 
 .image-click-hint span {
   font-size: 0.75rem;
   font-weight: 500;
-  color: white;
+  color: var(--neutral-200);
 }
 
 .annotated-image-container:hover .image-click-hint {
@@ -834,8 +717,8 @@ div:not(:has(*)) {
 }
 
 .diagnosis-card {
-  padding: 1rem;
-  border-radius: 0.75rem;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
   background: rgba(15, 23, 42, 0.3);
   border: 1px solid var(--neutral-800);
 }
@@ -860,7 +743,7 @@ div:not(:has(*)) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4);
 }
 
 .diagnosis-header h4 {
@@ -872,15 +755,15 @@ div:not(:has(*)) {
 .info-button {
   width: 24px;
   height: 24px;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background-color: rgba(15, 23, 42, 0.5);
   border: 1px solid var(--neutral-700);
-  color: white;
+  color: var(--neutral-300);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
 }
 
 .info-button:hover {
@@ -891,7 +774,7 @@ div:not(:has(*)) {
 .confidence-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--spacing-2);
   flex-wrap: wrap;
 }
 
@@ -905,7 +788,7 @@ div:not(:has(*)) {
   flex: 1;
   height: 8px;
   background-color: var(--neutral-800);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   overflow: hidden;
   position: relative;
 }
@@ -913,7 +796,7 @@ div:not(:has(*)) {
 .confidence-fill {
   height: 100%;
   background: linear-gradient(to right, var(--primary-600), var(--primary-400));
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   transition: width 1s ease-out;
 }
 
@@ -929,15 +812,15 @@ div:not(:has(*)) {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--spacing-3);
 }
 
 .detection-item {
-  padding: 0.75rem;
+  padding: var(--spacing-3);
   background: rgba(15, 23, 42, 0.3);
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   border: 1px solid var(--neutral-800);
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
 }
 
 .detection-item:hover {
@@ -950,7 +833,7 @@ div:not(:has(*)) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-2);
 }
 
 .detection-name {
@@ -963,7 +846,7 @@ div:not(:has(*)) {
   font-weight: 600;
   padding: 0.25rem 0.5rem;
   background: rgba(30, 166, 255, 0.1);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   color: var(--primary-300);
   border: 1px solid rgba(30, 166, 255, 0.2);
 }
@@ -971,7 +854,7 @@ div:not(:has(*)) {
 .detection-bar {
   height: 6px;
   background-color: var(--neutral-800);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   overflow: hidden;
   position: relative;
 }
@@ -979,7 +862,7 @@ div:not(:has(*)) {
 .detection-fill {
   height: 100%;
   background: linear-gradient(to right, var(--primary-600), var(--primary-400));
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   transition: width 1s ease-out;
 }
 
@@ -996,44 +879,56 @@ div:not(:has(*)) {
   align-items: center;
   text-align: center;
   max-width: 600px;
-  padding: 2rem 1rem;
-  gap: 1rem;
+  padding: var(--spacing-8) var(--spacing-4);
+  gap: var(--spacing-4);
 }
 
 .icon-container {
   width: 60px;
   height: 60px;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background: rgba(30, 166, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4);
   border: 1px solid rgba(30, 166, 255, 0.1);
+}
+
+.large-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--primary-400);
 }
 
 .empty-state h2 {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--neutral-100);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-2);
 }
 
 .empty-state p {
   color: var(--neutral-400);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-6);
 }
 
 .features {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
 }
 
 .feature {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--spacing-2);
+}
+
+.feature-icon {
+  color: var(--primary-500);
+  width: 18px;
+  height: 18px;
 }
 
 .feature span {
@@ -1044,10 +939,10 @@ div:not(:has(*)) {
 .start-prompt {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--spacing-2);
   color: var(--primary-400);
   font-weight: 500;
-  margin-top: 1rem;
+  margin-top: var(--spacing-4);
 }
 
 .prompt-icon {
@@ -1073,16 +968,16 @@ div:not(:has(*)) {
   justify-content: center;
   z-index: 1000;
   backdrop-filter: blur(5px);
-  padding: 1.5rem;
+  padding: var(--spacing-6);
 }
 
 .modal-content {
   position: relative;
   max-width: 90%;
   max-height: 90%;
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-xl);
   background: var(--neutral-900);
   border: 1px solid var(--neutral-800);
   display: flex;
@@ -1095,17 +990,17 @@ div:not(:has(*)) {
   right: 15px;
   width: 40px;
   height: 40px;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid var(--neutral-700);
-  color: white;
+  color: var(--neutral-300);
   font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
 }
 
 .close-modal:hover {
@@ -1122,7 +1017,7 @@ div:not(:has(*)) {
 }
 
 .modal-actions {
-  padding: 1rem;
+  padding: var(--spacing-4);
   display: flex;
   justify-content: center;
   background: var(--neutral-900);
@@ -1133,27 +1028,116 @@ div:not(:has(*)) {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-5);
   background: rgba(30, 166, 255, 0.1);
-  color: white;
+  color: var(--primary-300);
   font-weight: 600;
   border: 1px solid rgba(30, 166, 255, 0.2);
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: 0.3s ease all;
+  transition: var(--transition-all);
 }
 
 .action-button:hover {
   background: rgba(30, 166, 255, 0.2);
-  color: white;
+  color: var(--primary-200);
   transform: translateY(-2px);
+}
+
+.upload-button {
+  margin-top: var(--spacing-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-6);
+  background: rgba(30, 166, 255, 0.1);
+  color: var(--primary-300);
+  font-weight: 600;
+  border: 1px solid rgba(30, 166, 255, 0.2);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.upload-button:hover {
+  background: rgba(30, 166, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.upload-options {
+  text-align: center;
+  margin-top: var(--spacing-4);
+  color: var(--neutral-400);
+  font-size: 0.875rem;
+  position: relative;
+}
+
+.upload-options::before,
+.upload-options::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20%;
+  height: 1px;
+  background: var(--neutral-800);
+}
+
+.upload-options::before {
+  left: 10%;
+}
+
+.upload-options::after {
+  right: 10%;
+}
+
+.image-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.75);
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-3);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--transition-all);
+  backdrop-filter: blur(4px);
+}
+
+.control-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: transparent;
+  color: var(--neutral-200);
+  border: 1px solid var(--neutral-700);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.remove-button:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: white;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.change-button:hover {
+  background: rgba(30, 166, 255, 0.2);
+  color: var(--primary-300);
+  border-color: rgba(30, 166, 255, 0.4);
 }
 
 @media (max-width: 1200px) {
   .services-container {
     width: 100%;
-    padding: 0 1.5rem;
+    padding: 0 var(--spacing-6);
   }
 }
 
@@ -1168,18 +1152,18 @@ div:not(:has(*)) {
 
   .results-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--spacing-8);
   }
 }
 
 @media (max-width: 768px) {
   .services-container {
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 var(--spacing-4);
   }
 
   .services-header {
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-8);
   }
 
   .services-header h1 {
@@ -1191,27 +1175,27 @@ div:not(:has(*)) {
   }
 
   .card-header {
-    padding: 1rem;
+    padding: var(--spacing-4);
   }
 
   .card-content {
-    padding: 1rem;
+    padding: var(--spacing-4);
   }
 
   .card-footer {
-    padding: 1rem;
+    padding: var(--spacing-4);
     flex-direction: column;
   }
 
   .examples-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: var(--spacing-3);
   }
 
   .features {
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--spacing-3);
   }
 
   .upload-options::before,
@@ -1228,8 +1212,8 @@ div:not(:has(*)) {
   }
   
   .image-controls {
-    padding: 0.5rem;
-    gap: 0.5rem;
+    padding: var(--spacing-2);
+    gap: var(--spacing-2);
   }
 }
 
@@ -1241,7 +1225,7 @@ div:not(:has(*)) {
   .diagnosis-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: var(--spacing-2);
   }
 
   .confidence-bar {
@@ -1260,7 +1244,7 @@ div:not(:has(*)) {
   
   .image-controls {
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2);
   }
 }
