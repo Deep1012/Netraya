@@ -1,11 +1,26 @@
 import './ServicesPage.css';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Loader2, AlertCircle, Eye, Download, Info, ArrowLeft, 
-  ArrowRight, Upload, Trash2, Play, ImageIcon, CheckCircle, 
-  ChevronRight, FileDown, Maximize, ZoomIn, ExternalLink, X
-} from 'lucide-react';
+  IoCloseOutline,
+  IoArrowBackOutline,
+  IoArrowForwardOutline,
+  IoChevronForwardOutline,
+  IoInformationCircleOutline,
+  IoAlertCircleOutline,
+  IoCheckmarkCircleOutline,
+  IoDownloadOutline,
+  IoCloudUploadOutline,
+  IoTrashOutline,
+  IoEyeOutline,
+  IoPlayOutline,
+  IoReloadOutline,
+  IoImageOutline,
+  IoSwapVerticalOutline
+} from 'react-icons/io5';
+
+// Add inline style for icons in case they're not showing
+const iconStyle = { display: 'inline-flex', verticalAlign: 'middle' };
 
 // Import sample images (these were already imported)
 import exImage1 from '../../assets/0.jpg';
@@ -27,6 +42,7 @@ const ServicesPage = () => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   const [showFullImage, setShowFullImage] = useState(false);
+  const [simulationMode, setSimulationMode] = useState(false);
   const fileInputRef = useRef(null);
   
   // Handle file upload from Dropzone
@@ -147,6 +163,32 @@ const ServicesPage = () => {
     setShowFullImage(!showFullImage);
   };
 
+  // Toggle simulation mode
+  const toggleSimulation = async () => {
+    try {
+      setLoading(true);  // Show loading state when toggling
+      
+      const response = await fetch('http://localhost:5000/api/model/toggle-simulation', {
+        method: 'POST',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to toggle simulation mode');
+      }
+      
+      const data = await response.json();
+      setSimulationMode(data.simulation_mode);
+      
+      // Show a temporary notification that would be displayed if you had a notification system
+      console.log(`Testing mode ${data.simulation_mode ? 'enabled' : 'disabled'}: ${data.message}`);
+    } catch (error) {
+      console.error('Error toggling simulation mode:', error);
+      setError('Failed to toggle testing mode. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -176,6 +218,41 @@ const ServicesPage = () => {
     if (!severity) return '';
     return severity.toLowerCase();
   };
+  
+  // Get explanation for DR grade
+  const getDRExplanation = (grade) => {
+    if (!grade) return '';
+    
+    const explanations = {
+      'None': 'No signs of diabetic retinopathy detected.',
+      'Mild': 'Early stage with small microaneurysms. Exudates (EX) may be present.',
+      'Moderate': 'More microaneurysms, some hemorrhages, and hard exudates (EX) present.',
+      'Severe': 'Multiple hemorrhages, venous beading, and soft exudates (SE/cotton wool spots).',
+      'Proliferative DR': 'Advanced stage with neovascularization, hemorrhages, and potential retinal detachment.'
+    };
+    
+    return explanations[grade] || '';
+  };
+
+  useEffect(() => {
+    // Check initial simulation mode status when component mounts
+    const checkSimulationMode = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/model/simulation-status', {
+          method: 'GET',
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setSimulationMode(data.simulation_mode);
+        }
+      } catch (error) {
+        console.error('Error checking simulation mode:', error);
+      }
+    };
+    
+    checkSimulationMode();
+  }, []);
 
   return (
     <div className="app-container">
@@ -193,7 +270,7 @@ const ServicesPage = () => {
         <div className="full-image-modal" onClick={handleToggleFullImage}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <button className="close-modal" onClick={handleToggleFullImage}>
-              <X size={20} />
+              <IoCloseOutline size={20} style={iconStyle} />
             </button>
             <img 
               src={result.yolo.annotated_image} 
@@ -202,7 +279,7 @@ const ServicesPage = () => {
             />
             <div className="modal-actions">
               <button className="action-button" onClick={handleDownloadImage}>
-                <Download size={20} />
+                <IoDownloadOutline size={20} style={iconStyle} />
                 <span>Download Image</span>
               </button>
             </div>
@@ -221,6 +298,24 @@ const ServicesPage = () => {
           <div className="badge">AI-Powered Medical Analysis</div>
           <h1 className="gradient-heading">Diabetic Retinopathy Detection System</h1>
           <p>Upload your retinal images to instantly detect diabetic retinopathy with our advanced AI-powered system. Get accurate results in seconds.</p>
+          
+          {/* Simulation Mode Toggle */}
+          <div className="simulation-toggle">
+            <button 
+              className={`simulation-button ${simulationMode ? 'active' : ''}`}
+              onClick={toggleSimulation}
+              title={simulationMode ? "Disable Class Rotation (Use Model)" : "Enable Class Rotation (For Testing)"}
+              disabled={loading}
+            >
+              <IoSwapVerticalOutline size={16} style={iconStyle} />
+              <span>
+                {loading ? "Switching..." : simulationMode ? 
+                  "Testing Mode: ON " : 
+                  "Testing Mode: OFF"
+                }
+              </span>
+            </button>
+          </div>
         </motion.div>
 
         {/* Main Content - Vertical Layout */}
@@ -234,7 +329,7 @@ const ServicesPage = () => {
           <motion.div className="section" variants={itemVariants}>
             <div className="card upload-card">
               <div className="card-header">
-                <h2><Upload className="icon" /> Image Upload</h2>
+                <h2><IoCloudUploadOutline className="icon" style={iconStyle} /> Image Upload</h2>
               </div>
               <div className="card-content">
                 {!showPreview ? (
@@ -256,11 +351,11 @@ const ServicesPage = () => {
                       }}
                     >
                       <div className="dropzone-content">
-                        <Upload className="dropzone-icon" />
+                        <IoCloudUploadOutline className="dropzone-icon" style={iconStyle} />
                         <h3>Drag & drop your retina image here</h3>
                         <p>Or click to browse files (JPG, PNG up to 5MB)</p>
                         <button className="upload-button">
-                          <Upload size={18} />
+                          <IoCloudUploadOutline size={18} style={iconStyle} />
                           <span>Select Image</span>
                         </button>
                       </div>
@@ -282,21 +377,21 @@ const ServicesPage = () => {
                         onClick={handleClearImage}
                         title="Remove image"
                       >
-                        <X size={16} />
+                        <IoCloseOutline size={16} style={iconStyle} />
                       </button>
                       <div className="image-controls">
                         <button 
                           className="control-button remove-button"
                           onClick={handleClearImage}
                         >
-                          <Trash2 size={16} />
+                          <IoTrashOutline size={16} style={iconStyle} />
                           <span>Remove</span>
                         </button>
                         <button 
                           className="control-button change-button"
                           onClick={handleUploadClick}
                         >
-                          <Upload size={16} />
+                          <IoCloudUploadOutline size={16} style={iconStyle} />
                           <span>Change</span>
                         </button>
                       </div>
@@ -314,7 +409,7 @@ const ServicesPage = () => {
                     
                     {error && (
                       <div className="error-message">
-                        <AlertCircle size={16} />
+                        <IoAlertCircleOutline size={16} style={iconStyle} />
                         <span>{error}</span>
                       </div>
                     )}
@@ -326,12 +421,12 @@ const ServicesPage = () => {
                     >
                       {loading ? (
                         <>
-                          <Loader2 className="icon spin" />
+                          <IoReloadOutline className="icon spin" style={iconStyle} />
                           <span>Processing...</span>
                         </>
                       ) : (
                         <>
-                          <Play className="icon" />
+                          <IoPlayOutline className="icon" style={iconStyle} />
                           <span>Analyze Image</span>
                         </>
                       )}
@@ -346,7 +441,7 @@ const ServicesPage = () => {
           <motion.div className="section" variants={itemVariants}>
             <div className="card examples-card">
               <div className="card-header">
-                <h2><ImageIcon className="icon" /> Example Images</h2>
+                <h2><IoImageOutline className="icon" style={iconStyle} /> Example Images</h2>
               </div>
               <div className="card-content">
                 <div className="examples-container">
@@ -386,7 +481,7 @@ const ServicesPage = () => {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="card-header results-header">
-                    <h2><Info className="icon" /> Analysis Results</h2>
+                    <h2><IoInformationCircleOutline className="icon" style={iconStyle} /> Analysis Results</h2>
                     <div className={`severity-badge ${getSeverityClass(result.classification.class)}`}>
                       {result.classification.class}
                     </div>
@@ -403,14 +498,14 @@ const ServicesPage = () => {
                               title="View Full Size"
                               onClick={handleToggleFullImage}
                             >
-                              <Eye size={16} />
+                              <IoEyeOutline size={16} style={iconStyle} />
                             </button>
                             <button 
                               className="icon-button" 
                               title="Download Image"
                               onClick={handleDownloadImage}
                             >
-                              <FileDown size={16} />
+                              <IoDownloadOutline size={16} style={iconStyle} />
                             </button>
                           </div>
                         </div>
@@ -421,7 +516,7 @@ const ServicesPage = () => {
                             className="annotated-image"
                           />
                           <div className="image-click-hint">
-                            <Eye size={20} />
+                            <IoEyeOutline size={20} style={iconStyle} />
                             <span>Click to enlarge</span>
                           </div>
                         </div>
@@ -444,6 +539,9 @@ const ServicesPage = () => {
                                 ></div>
                               </div>
                               <div className="confidence-value">{(result.classification.confidence * 100).toFixed(1)}%</div>
+                            </div>
+                            <div className="diagnosis-explanation">
+                              {getDRExplanation(result.classification.class)}
                             </div>
                           </div>
                         </div>
@@ -482,12 +580,12 @@ const ServicesPage = () => {
                   </div>
                   <div className="card-footer">
                     <button className="secondary-button" onClick={handleClearImage}>
-                      <ArrowLeft className="icon" />
+                      <IoArrowBackOutline className="icon" style={iconStyle} />
                       <span>Try Another Image</span>
                     </button>
                     <button className="primary-button" onClick={handleClearImage}>
                       <span>Next Steps</span>
-                      <ArrowRight className="icon" />
+                      <IoArrowForwardOutline className="icon" style={iconStyle} />
                     </button>
                   </div>
                 </motion.div>
@@ -500,27 +598,27 @@ const ServicesPage = () => {
                 >
                   <div className="empty-state">
                     <div className="icon-container">
-                      <Info className="large-icon" />
+                      <IoInformationCircleOutline className="large-icon" style={iconStyle} />
                     </div>
                     <h2>Ready to Analyze</h2>
                     <p>Upload a retinal image or select one of our examples to begin the analysis process. Our AI will detect signs of diabetic retinopathy and provide a detailed report.</p>
                     <div className="features">
                       <div className="feature">
-                        <CheckCircle className="feature-icon" />
+                        <IoCheckmarkCircleOutline className="feature-icon" style={iconStyle} />
                         <span>Fast Analysis</span>
                       </div>
                       <div className="feature">
-                        <CheckCircle className="feature-icon" />
+                        <IoCheckmarkCircleOutline className="feature-icon" style={iconStyle} />
                         <span>Accurate Results</span>
                       </div>
                       <div className="feature">
-                        <CheckCircle className="feature-icon" />
+                        <IoCheckmarkCircleOutline className="feature-icon" style={iconStyle} />
                         <span>Secure Processing</span>
                       </div>
                     </div>
                     <div className="start-prompt">
                       <span>Get started by uploading an image</span>
-                      <ChevronRight className="prompt-icon" />
+                      <IoChevronForwardOutline className="prompt-icon" style={iconStyle} />
                     </div>
                   </div>
                 </motion.div>

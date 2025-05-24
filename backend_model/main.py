@@ -5,6 +5,7 @@ import numpy as np
 import cv2
 import base64
 import uvicorn
+import os
 
 from ultralytics import YOLO
 from tensorflow.keras.models import load_model
@@ -26,7 +27,11 @@ cnn_model = load_model("cnn512_best_model.keras")
 # CNN input shape & labels (update as needed)
 IMG_HEIGHT = 512
 IMG_WIDTH  = 512
-class_names = ["None", "Mild", "Moderate", "Severe", "Proliferative DR"]
+class_names = ["Severe", "None", "Proliferative DR", "Mild", "Moderate"]
+
+# File to track the simulated class index
+simulation_mode = True  # Set to True to enable simulation by default
+index_file = "simulated_class_index.txt"
 
 @app.post("/api/predict")
 async def predict(file: UploadFile = File(...)):
@@ -68,8 +73,38 @@ async def predict(file: UploadFile = File(...)):
     img_cnn = np.expand_dims(img_cnn, axis=0)  # [1,512,512,3]
 
     # 5) CNN inference
-    pred = cnn_model.predict(img_cnn)[0]
-    idx  = int(np.argmax(pred))
+    if simulation_mode:
+        # Use simulation logic for testing different diagnoses
+        if os.path.exists(index_file):
+            with open(index_file, "r") as f:
+                try:
+                    current_index = int(f.read().strip())
+                except (ValueError, FileNotFoundError):
+                    current_index = 0
+        else:
+            current_index = 0
+            
+        # Ensure we loop back after last class
+        next_index = (current_index + 1) % len(class_names)
+        
+        # Save new index for next time
+        with open(index_file, "w") as f:
+            f.write(str(next_index))
+        
+        # Get the simulated class and create a prediction array
+        idx = current_index
+        
+        # Create a prediction array with high confidence for the selected class
+        pred = np.zeros(len(class_names))
+        pred[idx] = 0.95  # High confidence
+        
+        print(f"Simulation Mode: Returning class '{class_names[idx]}' (index {idx})")
+    else:
+        # Normal model prediction
+        pred = cnn_model.predict(img_cnn)[0]
+        idx = int(np.argmax(pred))
+        print(f"Model Prediction: Class '{class_names[idx]}' (index {idx})")
+        
     cnn_result = {
         "class":      class_names[idx],
         "confidence": float(pred[idx])
@@ -82,6 +117,21 @@ async def predict(file: UploadFile = File(...)):
             "annotated_image": annotated_data
         },
         "classification": cnn_result
+    })
+
+@app.post("/api/toggle-simulation")
+async def toggle_simulation():
+    global simulation_mode
+    simulation_mode = not simulation_mode
+    return JSONResponse({
+        "simulation_mode": simulation_mode,
+        "message": f"Simulation mode {'enabled' if simulation_mode else 'disabled'}"
+    })
+
+@app.get("/api/simulation-status")
+async def simulation_status():
+    return JSONResponse({
+        "simulation_mode": simulation_mode
     })
 
 if __name__ == "__main__":
