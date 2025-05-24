@@ -47,18 +47,24 @@ const Services = ({ isLoggedIn }) => {
         </div>
 
         {/* Right Card */}
-        <div
-          className="service-card-wrapper service-card-link"
-          onClick={(e) => handleCardClick(e, "/servicespage")}
-        >
+        <div className="service-card-wrapper">
           <div className="service-card">
             <img src={serviceIcon} alt="Service Icon" className="service-icon" />
             <h3>Request a Demo to Experience Our Solutions</h3>
             <p>See how our innovative tool can transform your practice.</p>
           </div>
-          
+          <div className="service-actions">
+            <button onClick={() => setIsDemoOpen(true)} className="service-btn">
+              Request Demo
+            </button>
+          </div>
         </div>
       </div>
+
+      <DemoRequestForm 
+        isOpen={isDemoOpen}
+        onClose={() => setIsDemoOpen(false)}
+      />
     </section>
   );
 };

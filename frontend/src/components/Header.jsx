@@ -24,8 +24,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         {isLoggedIn && (
           <button onClick={handleLogout} className="contact-btn">Logout</button>
         )}
-        <button className="contact-btn">Contact Us</button>
+        <button onClick={() => setIsContactOpen(true)} className="contact-btn">Contact Us</button>
       </div>
+
+      <ContactForm 
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </header>
   );
 };
