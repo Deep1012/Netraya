@@ -1,3 +1,5 @@
 node_modules/
 .env
 dist/
+backend_model/best.pt
+backend_model/cnn512_best_model.keras
