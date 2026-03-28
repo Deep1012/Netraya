@@ -18,10 +18,7 @@ app.use('/api/model', modelRoutes);
 // MongoDB connection
 const MONGODB_URL = process.env.MONGODB_URL;
 
-mongoose.connect(MONGODB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(MONGODB_URL)
 .then(() => {
   console.log('Connected to MongoDB');
   app.listen(5000, () => console.log('Server running on port 5000'));

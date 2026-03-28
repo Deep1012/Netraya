@@ -1,7 +1,7 @@
 const express = require('express');
 const authenticateToken = require('../middleware/authenticateToken');
 const multer = require('multer');
-const { giveResult } = require('../controllers/modelController');
+const { giveResult, toggleSimulation, getSimulationStatus } = require('../controllers/modelController');
 const path = require('path');
 
 const storage = multer.diskStorage({
@@ -31,5 +31,7 @@ const upload = multer({
 const router = express.Router();
 
 router.post('/give-result', upload.single('file'), giveResult);
+router.post('/toggle-simulation', toggleSimulation);
+router.get('/simulation-status', getSimulationStatus);
 
 module.exports = router;

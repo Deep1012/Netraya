@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
+import ContactForm from "./ContactForm";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
+const [isContactOpen, setIsContactOpen] = useState(false);
+
   const handleLogout = () => {
     localStorage.removeItem('token'); // Remove token from localStorage
     setIsLoggedIn(false); // Update login state
