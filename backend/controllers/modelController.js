@@ -12,7 +12,7 @@ const giveResult = async (req, res) => {
         const formData = new FormData();
         formData.append('file', fs.createReadStream(image));
         
-        const response = await fetch('http://127.0.0.1:8000/api/predict', {
+        const response = await fetch(`${process.env.MODEL_API_URL || 'http://127.0.0.1:8000'}/api/predict`, {
             method: 'POST',
             body: formData,
             headers: formData.getHeaders()
@@ -34,7 +34,7 @@ const giveResult = async (req, res) => {
 
 const toggleSimulation = async (req, res) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/toggle-simulation', {
+        const response = await fetch(`${process.env.MODEL_API_URL || 'http://127.0.0.1:8000'}/api/toggle-simulation`, {
             method: 'POST',
         });
         
@@ -54,7 +54,7 @@ const toggleSimulation = async (req, res) => {
 
 const getSimulationStatus = async (req, res) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/simulation-status', {
+        const response = await fetch(`${process.env.MODEL_API_URL || 'http://127.0.0.1:8000'}/api/simulation-status`, {
             method: 'GET',
         });
         

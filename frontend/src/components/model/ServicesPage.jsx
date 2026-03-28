@@ -126,7 +126,7 @@ const ServicesPage = () => {
       const formData = new FormData();
       formData.append('file', imageFile);
 
-      const response = await fetch('http://localhost:5000/api/model/give-result', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/model/give-result`, {
         method: 'POST',
         body: formData,
       });
@@ -170,7 +170,7 @@ const ServicesPage = () => {
     try {
       setLoading(true);  // Show loading state when toggling
       
-      const response = await fetch('http://localhost:5000/api/model/toggle-simulation', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/model/toggle-simulation`, {
         method: 'POST',
       });
       
@@ -247,7 +247,7 @@ const ServicesPage = () => {
     // Check initial simulation mode status when component mounts
     const checkSimulationMode = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/model/simulation-status', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/model/simulation-status`, {
           method: 'GET',
         });
         
