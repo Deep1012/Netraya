@@ -21,7 +21,11 @@
       "Bash(find c:/Barodaweb/ElevatePhase2/ElevateApp/src/screen-groups -name *ayment* -o -name *aypal*)",
       "WebSearch",
       "Bash(npm run:*)",
-      "Bash(python main.py)"
+      "Bash(python main.py)",
+      "Bash(netlify --version)",
+      "Bash(npx netlify:*)",
+      "Bash(netlify status:*)",
+      "Bash(netlify login:*)"
     ]
   }
 }
