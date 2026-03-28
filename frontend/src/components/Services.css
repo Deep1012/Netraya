@@ -1,5 +1,5 @@
 .services {
-  padding: 3rem 2rem;
+  padding: 4rem 2rem;
   background-color: rgba(19, 22, 25, 1);
   color: #fff;
   text-align: center;
@@ -8,91 +8,133 @@
 .services h2 {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-family: 'Poppins', sans-serif;
 }
 
 .service-cards {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .service-card-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: 1;
+  min-width: 280px;
+  max-width: 420px;
+  border-radius: 16px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card-wrapper:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
 }
 
 .service-card {
-  background-color: rgba(19, 22, 25, 1);
-  border-radius: 10px;
-  padding: 2rem;
-  min-width: 280px;
-  max-width: 400px;
-  color: #fff;
   text-align: left;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-  margin-bottom: 1rem; /* Space below the card */
-}
-
-.service-card:hover {
-  transform: translateY(-5px);
+  margin-bottom: 1.5rem;
 }
 
 .service-icon {
   width: 40px;
   height: 40px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
 }
 
 .service-card h3 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   font-family: 'Poppins', sans-serif;
+  line-height: 1.3;
 }
 
 .service-card p {
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
   font-family: 'Poppins', sans-serif;
-  color: #ccc;
+  color: #999;
 }
 
 .service-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: center;
-  padding-left: 2rem; /* Align with card padding */
+  flex-wrap: wrap;
 }
 
-.service-btn {
-  background-color: transparent;
-  border: 2px solid #fff;
-  border-radius: 20px;
-  padding: 0.5rem 1.5rem;
-  color: #fff;
+/* Primary CTA - white filled */
+.service-btn-primary {
+  background: #fff;
+  color: #111;
+  border: none;
+  border-radius: 30px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.service-btn:hover {
-  background-color: #333;
+.service-btn-primary:hover {
+  background: #e0e0e0;
+  transform: scale(1.03);
 }
 
-.sign-up-link {
-  color: #fff;
+/* Secondary link */
+.service-btn-secondary {
+  color: #999;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-family: 'Poppins', sans-serif;
-  transition: color 0.3s;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.6rem 0.5rem;
 }
 
-.sign-up-link:hover {
-  color: #aaa;
+.service-btn-secondary:hover {
+  color: #fff;
+}
+
+/* Outlined button */
+.service-btn-outline {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  padding: 0.6rem 1.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .service-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card-wrapper {
+    max-width: 100%;
+  }
 }

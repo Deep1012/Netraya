@@ -27,7 +27,7 @@ cnn_model = load_model("cnn512_best_model.keras")
 # CNN input shape & labels (update as needed)
 IMG_HEIGHT = 512
 IMG_WIDTH  = 512
-class_names = ["Severe", "None", "Proliferative DR", "Mild", "Moderate"]
+class_names = ["Severe", "No DR", "Proliferative DR", "Mild", "Moderate"]
 
 # File to track the simulated class index
 simulation_mode = True  # Set to True to enable simulation by default

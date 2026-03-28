@@ -1,0 +1,146 @@
+.demo-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.demo-popup.show {
+  display: flex;
+}
+
+.demo-form {
+  background: #161618;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  border: 1px solid #2a2a2e;
+  text-align: center;
+}
+
+.demo-form .close-btn {
+  position: absolute;
+  right: 1rem;
+  top: 0.75rem;
+  background: none;
+  border: none;
+  color: #6e6e72;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.demo-form .close-btn:hover {
+  color: #fff;
+}
+
+.demo-form h2 {
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+.demo-form .form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.demo-form .form-input {
+  width: 100%;
+  max-width: 340px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #2a2a2e;
+  border-radius: 10px;
+  background: #1a1a1e;
+  color: #fff;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.25s;
+}
+
+.demo-form .form-input:focus {
+  outline: none;
+  border-color: #e8c547;
+  box-shadow: 0 0 0 2px rgba(232, 197, 71, 0.08);
+}
+
+.demo-form .form-input::placeholder {
+  color: #5c5c60;
+  text-align: left;
+}
+
+.demo-form textarea.form-input {
+  min-height: 100px;
+  resize: vertical;
+  text-align: left;
+}
+
+.demo-form .submit-btn {
+  width: 100%;
+  max-width: 340px;
+  padding: 0.75rem;
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  color: #0a0a0a;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0.5rem auto 0;
+  display: block;
+}
+
+.demo-form .submit-btn:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.demo-form .success-message {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+
+.demo-form .success-message.show {
+  display: block;
+}
+
+.demo-form .success-icon {
+  width: 52px;
+  height: 52px;
+  background: #e8c547;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.demo-form .success-icon::after {
+  content: "\2713";
+  color: #0a0a0a;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.demo-form .success-text {
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}

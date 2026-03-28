@@ -1,7 +1,8 @@
 import './ServicesPage.css';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import { Link } from 'react-router-dom';
+import {
   IoCloseOutline,
   IoArrowBackOutline,
   IoArrowForwardOutline,
@@ -16,7 +17,8 @@ import {
   IoPlayOutline,
   IoReloadOutline,
   IoImageOutline,
-  IoSwapVerticalOutline
+  IoSwapVerticalOutline,
+  IoHomeOutline
 } from 'react-icons/io5';
 
 // Add inline style for icons in case they're not showing
@@ -216,7 +218,14 @@ const ServicesPage = () => {
   // Get severity class
   const getSeverityClass = (severity) => {
     if (!severity) return '';
-    return severity.toLowerCase();
+    const mapping = {
+      'No DR': 'no-dr',
+      'Mild': 'mild',
+      'Moderate': 'moderate',
+      'Severe': 'severe',
+      'Proliferative DR': 'proliferative-dr'
+    };
+    return mapping[severity] || severity.toLowerCase().replace(/\s+/g, '-');
   };
   
   // Get explanation for DR grade
@@ -224,7 +233,7 @@ const ServicesPage = () => {
     if (!grade) return '';
     
     const explanations = {
-      'None': 'No signs of diabetic retinopathy detected.',
+      'No DR': 'No signs of diabetic retinopathy detected.',
       'Mild': 'Early stage with small microaneurysms. Exudates (EX) may be present.',
       'Moderate': 'More microaneurysms, some hemorrhages, and hard exudates (EX) present.',
       'Severe': 'Multiple hemorrhages, venous beading, and soft exudates (SE/cotton wool spots).',
@@ -256,12 +265,21 @@ const ServicesPage = () => {
 
   return (
     <div className="app-container">
+      {/* Top navigation */}
+      <nav className="sp-navbar">
+        <Link to="/" className="sp-nav-logo">netraya.</Link>
+        <Link to="/" className="sp-nav-back">
+          <IoHomeOutline size={16} style={iconStyle} />
+          <span>Home</span>
+        </Link>
+      </nav>
+
       {/* Hidden file input */}
-      <input 
-        type="file" 
+      <input
+        type="file"
         ref={fileInputRef}
         onChange={handleFileInput}
-        accept="image/*" 
+        accept="image/*"
         style={{ display: 'none' }}
       />
 

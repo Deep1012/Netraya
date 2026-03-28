@@ -3,7 +3,7 @@ import { FaEnvelope, FaKey } from 'react-icons/fa';
 import doctorImage2 from "../../assets/doctorImage2.png"; 
 import logo from '../../assets/logo.png';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const SignInForm = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -77,7 +77,7 @@ const SignInForm = ({ setIsLoggedIn }) => {
           </div>
           <button type="submit" className="submit-button">Sign In</button>
         </form>
-        <p className="signup-link"> Don't have an account? <a href="/signup">Create</a></p>
+        <p className="signup-link"> Don't have an account? <Link to="/signup">Create</Link></p>
       </div>
       <div className="image-section">
         <img src={doctorImage2} alt="Doctor" className="doctor-image" />
