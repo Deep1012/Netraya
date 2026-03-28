@@ -61,3 +61,47 @@
   background-color: #f0f0f0; /* Slight background change on hover */
   transform: scale(1.05);
 }
+
+@media (max-width: 768px) {
+  .about-us {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .about-us-image img {
+    max-width: 260px;
+  }
+
+  .about-us-content {
+    padding-left: 0;
+    align-items: center;
+  }
+
+  .about-us-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-us-content p {
+    font-size: 1rem;
+  }
+
+  .explore-btn {
+    align-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-us {
+    padding: 1.5rem 1rem;
+  }
+
+  .about-us-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-us-content p {
+    font-size: 0.9rem;
+  }
+}

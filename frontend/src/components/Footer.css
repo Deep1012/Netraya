@@ -120,4 +120,22 @@
   .footer-right {
     max-width: 100%;
   }
+
+  .footer-logo {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .subscribe-section {
+    flex-direction: column;
+  }
+
+  .subscribe-button {
+    width: 100%;
+  }
 }

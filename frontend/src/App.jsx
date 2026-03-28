@@ -9,7 +9,8 @@ import Footer from './components/Footer';
 import SignUpForm from "./components/User/SignUpForm";
 import SignInForm from "./components/User/SignInForm";
 import ServicesPage from "./components/model/ServicesPage";
-import RegistrationForm from "./components/User/RegistrationForm"; // Import RegistrationForm component
+import RegistrationForm from "./components/User/RegistrationForm";
+import { ToastContainer } from "./components/ui/Toast";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +24,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <ToastContainer />
         <Routes>
           {/* Route for the landing page */}
           <Route path="/" element={

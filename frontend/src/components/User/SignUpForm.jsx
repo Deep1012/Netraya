@@ -4,6 +4,7 @@ import doctorImage1 from '../../assets/doctorImage1.png';
 import logo from '../../assets/logo.png';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { showToast } from '../ui/Toast';
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -30,17 +31,18 @@ const SignUpForm = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        alert(data.message); // Show success message
-        navigate('/signin'); // Redirect to sign-in page
+        showToast(data.message || 'Account created successfully!', 'success');
+        setTimeout(() => navigate('/signin'), 1200);
       } else {
-        alert(data.message); // Show error message
+        showToast(data.message || 'Signup failed. Please try again.', 'error');
       }
     } catch (error) {
-      console.error('Error:', error);
+      showToast('Network error. Please try again.', 'error');
     }
   };
 
   return (
+    <div className="signup-page">
     <div className="signup-container">
       <div className="logo-container">
         <img src={logo} alt="Netraya Logo" className="logo-top" />
@@ -89,6 +91,7 @@ const SignUpForm = () => {
       <div className="image-section">
         <img src={doctorImage1} alt="Doctor" className="doctor-image" />
       </div>
+    </div>
     </div>
   );
 };
