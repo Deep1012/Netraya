@@ -1,9 +1,10 @@
 import './SignInForm.css';
 import { FaEnvelope, FaKey } from 'react-icons/fa';
-import doctorImage2 from "../../assets/doctorImage2.png"; 
+import doctorImage2 from "../../assets/doctorImage2.png";
 import logo from '../../assets/logo.png';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { showToast } from '../ui/Toast';
 
 const SignInForm = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -29,25 +30,27 @@ const SignInForm = ({ setIsLoggedIn }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        alert(data.message); // Show success message
-        localStorage.setItem('token', data.token); // Store token in local storage
-        setIsLoggedIn(true); // Set login state to true
+        showToast('Login successful! Redirecting...', 'success');
+        localStorage.setItem('token', data.token);
+        setIsLoggedIn(true);
 
-        // Check if the user is new and redirect accordingly
-        if (data.isNewUser) {
-          navigate('/registrationform'); // Redirect to RegistrationForm if user is new
-        } else {
-          navigate('/'); // Redirect to the landing page if user is not new
-        }
+        setTimeout(() => {
+          if (data.isNewUser) {
+            navigate('/registrationform');
+          } else {
+            navigate('/');
+          }
+        }, 1000);
       } else {
-        alert(data.message); // Show error message
+        showToast(data.message || 'Invalid credentials. Please try again.', 'error');
       }
     } catch (error) {
-      console.error('Error:', error);
+      showToast('Network error. Please try again.', 'error');
     }
   };
 
   return (
+    <div className="signin-page">
     <div className="signin-container">
       <div className="logo-container">
         <img src={logo} alt="Netraya Logo" className="logo-top" />
@@ -82,6 +85,7 @@ const SignInForm = ({ setIsLoggedIn }) => {
       <div className="image-section">
         <img src={doctorImage2} alt="Doctor" className="doctor-image" />
       </div>
+    </div>
     </div>
   );
 };

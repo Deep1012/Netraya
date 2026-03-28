@@ -20,6 +20,7 @@ import {
   IoSwapVerticalOutline,
   IoHomeOutline
 } from 'react-icons/io5';
+import { showToast } from '../ui/Toast';
 
 // Add inline style for icons in case they're not showing
 const iconStyle = { display: 'inline-flex', verticalAlign: 'middle' };
@@ -168,26 +169,19 @@ const ServicesPage = () => {
   // Toggle simulation mode
   const toggleSimulation = async () => {
     try {
-      setLoading(true);  // Show loading state when toggling
-      
       const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/model/toggle-simulation`, {
         method: 'POST',
       });
-      
-      if (!response.ok) {
-        throw new Error('Failed to toggle simulation mode');
-      }
-      
+
+      if (!response.ok) throw new Error('API error');
+
       const data = await response.json();
       setSimulationMode(data.simulation_mode);
-      
-      // Show a temporary notification that would be displayed if you had a notification system
-      console.log(`Testing mode ${data.simulation_mode ? 'enabled' : 'disabled'}: ${data.message}`);
+      showToast(`Testing mode ${data.simulation_mode ? 'enabled' : 'disabled'}`, 'info');
     } catch (error) {
-      console.error('Error toggling simulation mode:', error);
-      setError('Failed to toggle testing mode. Please try again.');
-    } finally {
-      setLoading(false);
+      const newMode = !simulationMode;
+      setSimulationMode(newMode);
+      showToast(`Testing mode ${newMode ? 'enabled' : 'disabled'} (local only)`, 'info');
     }
   };
 
@@ -244,22 +238,17 @@ const ServicesPage = () => {
   };
 
   useEffect(() => {
-    // Check initial simulation mode status when component mounts
     const checkSimulationMode = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/model/simulation-status`, {
-          method: 'GET',
-        });
-        
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/model/simulation-status`);
         if (response.ok) {
           const data = await response.json();
           setSimulationMode(data.simulation_mode);
         }
-      } catch (error) {
-        console.error('Error checking simulation mode:', error);
+      } catch {
+        // Model server unavailable, keep default state
       }
     };
-    
     checkSimulationMode();
   }, []);
 
@@ -319,19 +308,13 @@ const ServicesPage = () => {
           
           {/* Simulation Mode Toggle */}
           <div className="simulation-toggle">
-            <button 
+            <button
               className={`simulation-button ${simulationMode ? 'active' : ''}`}
               onClick={toggleSimulation}
               title={simulationMode ? "Disable Class Rotation (Use Model)" : "Enable Class Rotation (For Testing)"}
-              disabled={loading}
             >
               <IoSwapVerticalOutline size={16} style={iconStyle} />
-              <span>
-                {loading ? "Switching..." : simulationMode ? 
-                  "Testing Mode: ON " : 
-                  "Testing Mode: OFF"
-                }
-              </span>
+              <span>{simulationMode ? "Testing Mode: ON" : "Testing Mode: OFF"}</span>
             </button>
           </div>
         </motion.div>

@@ -4,33 +4,50 @@ import './Header.css';
 import ContactForm from "./ContactForm";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
-const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove token from localStorage
-    setIsLoggedIn(false); // Update login state
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
   };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <header className="header">
       <div className="logo">netraya.</div>
-      
-      <nav>
+
+      <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div className={`mobile-nav-overlay ${menuOpen ? 'open' : ''}`} onClick={closeMenu}></div>
+
+      <nav className={menuOpen ? 'open' : ''}>
         <ul className="nav-links">
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Our Services</a></li>
-          <li><a href="#articles">Articles</a></li>
+          <li><a href="#about" onClick={closeMenu}>About Us</a></li>
+          <li><a href="#services" onClick={closeMenu}>Our Services</a></li>
+          <li><a href="#articles" onClick={closeMenu}>Articles</a></li>
         </ul>
+        <div className="auth-buttons">
+          {isLoggedIn && (
+            <button onClick={() => { handleLogout(); closeMenu(); }} className="contact-btn">Logout</button>
+          )}
+          <button onClick={() => { setIsContactOpen(true); closeMenu(); }} className="contact-btn">Contact Us</button>
+        </div>
       </nav>
-      
-      <div className="auth-buttons">
+
+      <div className="auth-buttons desktop-auth">
         {isLoggedIn && (
           <button onClick={handleLogout} className="contact-btn">Logout</button>
         )}
         <button onClick={() => setIsContactOpen(true)} className="contact-btn">Contact Us</button>
       </div>
 
-      <ContactForm 
+      <ContactForm
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
       />

@@ -107,3 +107,38 @@
   color: #0f5bb5;
   transform: translateX(5px); /* Slide right on hover */
 }
+
+@media (max-width: 768px) {
+  .articles {
+    padding: 2rem 1.25rem;
+  }
+
+  .articles h2 {
+    font-size: 1.8rem;
+  }
+
+  .article-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .article {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .articles h2 {
+    font-size: 1.5rem;
+  }
+
+  .article h3 {
+    font-size: 1.1rem;
+  }
+
+  .article p {
+    font-size: 0.88rem;
+  }
+}

@@ -25,7 +25,14 @@
       "Bash(netlify --version)",
       "Bash(npx netlify:*)",
       "Bash(netlify status:*)",
-      "Bash(netlify login:*)"
+      "Bash(netlify login:*)",
+      "Bash(NETLIFY_AUTH_TOKEN=nfp_hNRXEVgqFNVg1JNPJMmt3C47PXniTeyo8e6d netlify sites:create --name netraya-app)",
+      "Bash(NETLIFY_AUTH_TOKEN=nfp_hNRXEVgqFNVg1JNPJMmt3C47PXniTeyo8e6d netlify deploy --dir=dist --prod)",
+      "Bash(VITE_API_URL=https://netraya-backend.onrender.com npm run build)",
+      "Bash(NETLIFY_AUTH_TOKEN=nfp_hNRXEVgqFNVg1JNPJMmt3C47PXniTeyo8e6d npx netlify-cli deploy --prod --dir=dist --site=netraya-app)",
+      "Bash(NETLIFY_AUTH_TOKEN=nfp_hNRXEVgqFNVg1JNPJMmt3C47PXniTeyo8e6d npx netlify-cli deploy --prod --dir=dist --site=1b405a8f-ea5a-48bc-aa6f-d41fcdd2ed7d)",
+      "Bash(echo $RENDER_API_KEY)",
+      "Read(//c/Users/deepm/.render/**)"
     ]
   }
 }

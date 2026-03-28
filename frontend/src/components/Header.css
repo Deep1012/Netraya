@@ -18,7 +18,7 @@
   letter-spacing: -0.5px;
 }
 
-nav {
+.header nav {
   display: flex;
   justify-content: center;
   flex: 1;
@@ -55,6 +55,10 @@ nav {
   align-items: center;
 }
 
+.header nav .auth-buttons {
+  display: none;
+}
+
 .contact-btn {
   background-color: #111;
   border: none;
@@ -73,23 +77,114 @@ nav {
   transform: translateY(-1px);
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 110;
+}
+
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+}
+
 @media (max-width: 768px) {
-  .header {
-    padding: 0.75rem 1rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  .hamburger {
+    display: flex;
+  }
+
+  .header nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 280px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4.5rem 1.5rem 2rem;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 100;
+  }
+
+  .header nav.open {
+    right: 0;
   }
 
   .nav-links {
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .nav-links li {
-    font-size: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .desktop-auth {
+    display: none;
+  }
+
+  .header nav .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 90;
+  }
+
+  .mobile-nav-overlay.open {
+    display: block;
   }
 
   .contact-btn {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.65rem 1rem;
+  }
+
+  .logo {
+    font-size: 1.35rem;
   }
 }
