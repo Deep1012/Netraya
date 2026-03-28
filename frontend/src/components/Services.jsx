@@ -49,7 +49,7 @@ const Services = ({ isLoggedIn }) => {
           </div>
         </div>
 
-        {/* Right Card - Demo */}
+        {/* Right Card */}
         <div className="service-card-wrapper">
           <div className="service-card">
             <img src={serviceIcon} alt="Service Icon" className="service-icon" />
@@ -61,10 +61,15 @@ const Services = ({ isLoggedIn }) => {
               Request Demo
             </button>
           </div>
+          <div className="service-actions">
+            <button onClick={() => setIsDemoOpen(true)} className="service-btn">
+              Request Demo
+            </button>
+          </div>
         </div>
       </div>
 
-      <DemoRequestForm
+      <DemoRequestForm 
         isOpen={isDemoOpen}
         onClose={() => setIsDemoOpen(false)}
       />
