@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 1.5rem; /* Reduced padding for a more compact look */
+  padding: 2rem 1.5rem;
+  padding-top: calc(2rem + 60px); /* offset for fixed header */
   background-color: rgba(19, 22, 25, 1);
   color: #fff; /* White text */
 }

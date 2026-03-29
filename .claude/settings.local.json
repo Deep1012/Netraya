@@ -33,7 +33,9 @@
       "Bash(NETLIFY_AUTH_TOKEN=nfp_hNRXEVgqFNVg1JNPJMmt3C47PXniTeyo8e6d npx netlify-cli deploy --prod --dir=dist --site=1b405a8f-ea5a-48bc-aa6f-d41fcdd2ed7d)",
       "Bash(echo $RENDER_API_KEY)",
       "Read(//c/Users/deepm/.render/**)",
-      "mcp__netlify__netlify-project-services-reader"
+      "mcp__netlify__netlify-project-services-reader",
+      "mcp__netlify__netlify-deploy-services-updater",
+      "mcp__netlify__netlify-deploy-services-reader"
     ]
   }
 }

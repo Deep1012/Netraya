@@ -6,9 +6,16 @@
   background-color: #fff;
   color: #111;
   border-bottom: 1px solid #eee;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 100;
+  transition: box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
