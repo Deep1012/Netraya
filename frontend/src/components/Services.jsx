@@ -61,11 +61,6 @@ const Services = ({ isLoggedIn }) => {
               Request Demo
             </button>
           </div>
-          <div className="service-actions">
-            <button onClick={() => setIsDemoOpen(true)} className="service-btn">
-              Request Demo
-            </button>
-          </div>
         </div>
       </div>
 
